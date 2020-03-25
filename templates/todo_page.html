@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method='POST' action="{% url 'add' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.new_name }}
+        {{ form.new_img }}
+        <button>add</button>
+    </form>
+    
+    {% for todo in todo_list %}
+        {% if todo.status %}
+            <p><i>{{ todo.name }}</i></p>
+        {% else %}
+            <p> <b>{{ todo.name }}</b> </p>
+            <img src="{{ todo.img.url }}" alt="">
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}
